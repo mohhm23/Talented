@@ -93,7 +93,71 @@
             }
         }
     </style>
+    
+    
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/crypto-js@4.1.1/crypto-js.min.js"></script>
     <script>
+    // Encryption key for AES
+    // Note: Set encryptionKey as an environment variable in production.
+    // Note: Set encryptionKey as an environment variable in production.
+    
+        
+    // Note: Use an environment variable for the encryption key to enhance security.
+    // Example for Netlify: Add ENCRYPTION_KEY as an environment variable in your Netlify site settings.
+    const encryptionKey = process.env.ENCRYPTION_KEY || "default_key_placeholder";
+    
+    
+
+    
+    // Function to sanitize input values
+    function sanitizeInput(input) {
+        const element = document.createElement('div');
+        element.innerText = input;
+        return element.innerHTML;
+    }
+
+    // Sanitize all form fields before encryption
+    function getSanitizedFormData(form) {
+        const formData = new FormData(form);
+        const sanitizedData = {};
+        for (const [key, value] of formData.entries()) {
+            sanitizedData[key] = sanitizeInput(value);
+        }
+        return sanitizedData;
+    }
+
+
+    // AES encryption function
+    function encryptData(data) {
+        return CryptoJS.AES.encrypt(JSON.stringify(data), encryptionKey).toString();
+    }
+
+    document.getElementById("form").addEventListener("submit", function(event) {
+        event.preventDefault();
+        const formData = new FormData(this);
+        const plainData = getSanitizedFormData(this);
+        const encryptedData = encryptData(plainData);
+
+        fetch(this.action, {
+            method: this.method,
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ data: encryptedData }),
+        })
+        .then(response => {
+            if (response.ok) {
+                alert("✅ تم إرسال البيانات بنجاح! شكراً لتواصلك معنا.");
+            } else {
+                alert("⚠️ حدث خطأ أثناء الإرسال. الرجاء المحاولة مرة أخرى.");
+            }
+        })
+        .catch(error => {
+            alert("❌ تعذر إرسال البيانات بسبب مشكلة تقنية: " + error.message);
+        });
+    });
+    </script>
+    <script>
+    
         function validateForm(event) {
             event.preventDefault();
             let idField = document.getElementById("idField");
@@ -147,7 +211,13 @@
         <p id="nameError" class="error">اسم الطالب يجب أن يكون باللغة العربية دون تكرار أحرف مفرط.</p>
         <input type="text" name="اسم ولي الأمر" placeholder="اسم ولي الأمر الكامل" required>
         <input type="text" name="رقم الطالب" placeholder="رقم الطالب (اختياري)">
-        <button type="submit">سجل الآن</button>
+        <div class="g-recaptcha" 
+    data-sitekey="مفتاح_الموقع_الخاصة_بك" 
+    <!-- Replace "مفتاح_الموقع_الخاصة_بك" with your actual reCAPTCHA site key from Google -->
+    ></div><button type="submit" id="submitButton">سجل الآن</button>
+    <p class="note">يرجى التأكد من صحة جميع البيانات المدخلة قبل الإرسال.</p>
+    
+    
     </form>
     <p class="note">
         تنويه: هذا الموقع ليس الموقع الرسمي لمؤسسة "موهبة". تم إنشاؤه بواسطة فريق مستقل لمساعدة الطلاب على التسجيل في البرامج المقدمة من موهبة.
