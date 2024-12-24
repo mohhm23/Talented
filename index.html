@@ -75,36 +75,42 @@
             font-size: 14px;
             display: none;
         }
-        @media (max-width: 768px) {
-            header {
-                font-size: 20px;
-            }
-            input {
-                font-size: 18px;
-                padding: 16px;
-            }
-            button {
-                font-size: 18px;
-                padding: 16px;
-            }
-            form {
-                width: 90%;
-            }
-        }
     </style>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script>
+        const recaptchaSiteKey = "6Lf9DaUqAAAAAGY2pvXkmLYWQuWCBm-HsqlYTxQk"; // مفتاح reCAPTCHA العام
+
+        function onSubmit(event) {
+            event.preventDefault();
+
+            const idField = document.getElementById("idField");
+            const phoneField = document.getElementById("phoneField");
+            const studentNameField = document.getElementById("studentNameField");
+
+            // التحقق من صحة الحقول
+            if (!idField.value || !phoneField.value || !studentNameField.value) {
+                alert("⚠️ الرجاء تعبئة جميع الحقول المطلوبة.");
+                return;
+            }
+
+            const captchaResponse = grecaptcha.getResponse();
+            if (!captchaResponse) {
+                alert("⚠️ الرجاء التحقق من أنك لست روبوت.");
+                return;
+            }
+
+            alert("✅ تم إرسال البيانات بنجاح!");
+        }
+    </script>
 </head>
 <body>
     <header>
         تسجيل الطلاب الموهوبين
     </header>
-    <form id="form" action="https://formsubmit.co/helping.the.gifted@outlook.sa" method="POST">
+    <form id="form" action="https://formsubmit.co/helping.the.gifted@outlook.sa" method="POST" onsubmit="onSubmit(event)">
         <input type="text" id="idField" name="رقم الهوية" placeholder="رقم الهوية" required>
-        <p id="idError" class="error">رقم الهوية يجب أن يكون 10 أرقام صحيحة.</p>
         <input type="text" id="phoneField" name="رقم ولي الأمر" placeholder="رقم ولي الأمر" required>
-        <p id="phoneError" class="error">رقم الجوال يجب أن يبدأ بـ 05 ويتكون من 10 أرقام.</p>
         <input type="text" id="studentNameField" name="اسم الطالب" placeholder="اسم الطالب الكامل" required>
-        <p id="nameError" class="error">اسم الطالب يجب أن يكون باللغة العربية دون تكرار أحرف مفرط.</p>
         <input type="text" name="اسم ولي الأمر" placeholder="اسم ولي الأمر الكامل" required>
         <input type="text" name="رقم الطالب" placeholder="رقم الطالب (اختياري)">
         <div class="g-recaptcha" data-sitekey="6Lf9DaUqAAAAAGY2pvXkmLYWQuWCBm-HsqlYTxQk"></div>
@@ -115,7 +121,7 @@
         تنويه: هذا الموقع ليس الموقع الرسمي لمؤسسة "موهبة". تم إنشاؤه بواسطة فريق مستقل لمساعدة الطلاب على التسجيل في البرامج المقدمة من موهبة.
     </p>
     <footer>
-        تم تصميم الموقع من قبل محمد السبيعي، سعد القرني، إبراهيم سعيد القحطاني، وعبدالله الكلثمي.
+        تم تصميم الموقع من قبل فريق الدعم.
     </footer>
 </body>
 </html>
