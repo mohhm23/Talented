@@ -1,0 +1,159 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الطلاب الموهوبين</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f8fa;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            direction: rtl;
+        }
+        header {
+            background-color: #004080;
+            color: white;
+            padding: 20px 0;
+            font-size: 24px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        form {
+            background-color: white;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        input {
+            width: 100%;
+            padding: 15px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            transition: border-color 0.3s, background-color 0.3s;
+        }
+        input:focus {
+            border-color: #004080;
+            background-color: #eaf2f8;
+            outline: none;
+        }
+        button {
+            background-color: #004080;
+            color: white;
+            padding: 15px;
+            font-size: 18px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #003366;
+        }
+        .note {
+            color: #004080;
+            font-size: 14px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        footer {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #555;
+            text-align: center;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+            display: none;
+        }
+        @media (max-width: 768px) {
+            header {
+                font-size: 20px;
+            }
+            input {
+                font-size: 18px;
+                padding: 16px;
+            }
+            button {
+                font-size: 18px;
+                padding: 16px;
+            }
+            form {
+                width: 90%;
+            }
+        }
+    </style>
+    <script>
+        function validateForm(event) {
+            event.preventDefault();
+            let idField = document.getElementById("idField");
+            let phoneField = document.getElementById("phoneField");
+            let studentNameField = document.getElementById("studentNameField");
+            let idError = document.getElementById("idError");
+            let phoneError = document.getElementById("phoneError");
+            let nameError = document.getElementById("nameError");
+            let valid = true;
+
+            // Validate ID (10 digits)
+            if (!/^\d{10}$/.test(idField.value)) {
+                idError.style.display = "block";
+                valid = false;
+            } else {
+                idError.style.display = "none";
+            }
+
+            // Validate phone number (starts with 05 and is 10 digits)
+            if (!/^05\d{8}$/.test(phoneField.value)) {
+                phoneError.style.display = "block";
+                valid = false;
+            } else {
+                phoneError.style.display = "none";
+            }
+
+            // Validate student name (Arabic letters only, no repetitive characters like 'ممممم')
+            if (!/^[ء-ي\s]+$/.test(studentNameField.value) || /(.){3,}/.test(studentNameField.value)) {
+                nameError.style.display = "block";
+                valid = false;
+            } else {
+                nameError.style.display = "none";
+            }
+
+            if (valid) {
+                document.getElementById("form").submit();
+            }
+        }
+    </script>
+</head>
+<body>
+    <header>
+        تسجيل الطلاب الموهوبين
+    </header>
+    <form id="form" action="https://formsubmit.co/helping.the.gifted@outlook.sa" method="POST" onsubmit="validateForm(event)">
+        <input type="text" id="idField" name="رقم الهوية" placeholder="رقم الهوية" required>
+        <p id="idError" class="error">رقم الهوية يجب أن يكون 10 أرقام صحيحة.</p>
+        <input type="text" id="phoneField" name="رقم ولي الأمر" placeholder="رقم ولي الأمر" required>
+        <p id="phoneError" class="error">رقم الجوال يجب أن يبدأ بـ 05 ويتكون من 10 أرقام.</p>
+        <input type="text" id="studentNameField" name="اسم الطالب" placeholder="اسم الطالب الكامل" required>
+        <p id="nameError" class="error">اسم الطالب يجب أن يكون باللغة العربية دون تكرار أحرف مفرط.</p>
+        <input type="text" name="اسم ولي الأمر" placeholder="اسم ولي الأمر الكامل" required>
+        <input type="text" name="رقم الطالب" placeholder="رقم الطالب (اختياري)">
+        <button type="submit">سجل الآن</button>
+    </form>
+    <p class="note">
+        تنويه: هذا الموقع ليس الموقع الرسمي لمؤسسة "موهبة". تم إنشاؤه بواسطة فريق مستقل لمساعدة الطلاب على التسجيل في البرامج المقدمة من موهبة.
+    </p>
+    <footer>
+        تم تصميم الموقع من قبل محمد السبيعي، سعد القرني، إبراهيم سعيد القحطاني، وعبدالله الكلثمي.
+    </footer>
+</body>
+</html>
