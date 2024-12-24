@@ -70,50 +70,18 @@
             color: #555;
             text-align: center;
         }
-        .error {
-            color: red;
-            font-size: 14px;
-            display: none;
-        }
     </style>
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-    <script>
-        const recaptchaSiteKey = "6Lf9DaUqAAAAAGY2pvXkmLYWQuWCBm-HsqlYTxQk"; // مفتاح reCAPTCHA العام
-
-        function onSubmit(event) {
-            event.preventDefault();
-
-            const idField = document.getElementById("idField");
-            const phoneField = document.getElementById("phoneField");
-            const studentNameField = document.getElementById("studentNameField");
-
-            // التحقق من صحة الحقول
-            if (!idField.value || !phoneField.value || !studentNameField.value) {
-                alert("⚠️ الرجاء تعبئة جميع الحقول المطلوبة.");
-                return;
-            }
-
-            const captchaResponse = grecaptcha.getResponse();
-            if (!captchaResponse) {
-                alert("⚠️ الرجاء التحقق من أنك لست روبوت.");
-                return;
-            }
-
-            alert("✅ تم إرسال البيانات بنجاح!");
-        }
-    </script>
 </head>
 <body>
     <header>
         تسجيل الطلاب الموهوبين
     </header>
-    <form id="form" action="https://formsubmit.co/helping.the.gifted@outlook.sa" method="POST" onsubmit="onSubmit(event)">
-        <input type="text" id="idField" name="رقم الهوية" placeholder="رقم الهوية" required>
-        <input type="text" id="phoneField" name="رقم ولي الأمر" placeholder="رقم ولي الأمر" required>
-        <input type="text" id="studentNameField" name="اسم الطالب" placeholder="اسم الطالب الكامل" required>
+    <form action="https://formspree.io/f/mkgggqpa" method="POST">
+        <input type="text" name="رقم الهوية" placeholder="رقم الهوية" required>
+        <input type="text" name="رقم ولي الأمر" placeholder="رقم ولي الأمر" required>
+        <input type="text" name="اسم الطالب" placeholder="اسم الطالب الكامل" required>
         <input type="text" name="اسم ولي الأمر" placeholder="اسم ولي الأمر الكامل" required>
         <input type="text" name="رقم الطالب" placeholder="رقم الطالب (اختياري)">
-        <div class="g-recaptcha" data-sitekey="6Lf9DaUqAAAAAGY2pvXkmLYWQuWCBm-HsqlYTxQk"></div>
         <button type="submit">سجل الآن</button>
         <p class="note">يرجى التأكد من صحة جميع البيانات المدخلة قبل الإرسال.</p>
     </form>
