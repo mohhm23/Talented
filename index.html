@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>الموقع تحت الصيانة</title>
     <style>
         body {
@@ -39,34 +40,27 @@
             width: 150px;
             height: 150px;
             margin: 0 auto 20px;
-            background: url('https://cdn-icons-png.flaticon.com/512/3506/3506616.png') no-repeat center/contain;
-            animation: shake 1s infinite;
-        }
-        @keyframes shake {
-            0%, 100% { transform: rotate(0); }
-            25% { transform: rotate(-10deg); }
-            50% { transform: rotate(10deg); }
-            75% { transform: rotate(-5deg); }
-        }
-        .contact {
-            color: #004080;
-            font-size: 16px;
-        }
-        .contact a {
-            color: #003366;
-            text-decoration: none;
-            font-weight: bold;
         }
     </style>
+    <!-- تضمين مكتبة Lottie -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.6/lottie.min.js" integrity="sha384-ZMcO+i+pB3K9SiovzFA7olniAxUcswvxzjKMewD/9QAOjKhT7phdRo9i4HpqN9Nk" crossorigin="anonymous"></script>
 </head>
 <body>
     <div class="container">
-        <div class="animation"></div>
+        <div class="animation" id="lottie-animation"></div>
         <h1>عذرًا، هذا الموقع تحت الصيانة</h1>
-        <p>إذا كنت تريد استخدام الموقع، يرجى التواصل مع مؤسس الموقع.</p>
-        <p class="contact">
-            تواصل مع: <a href="mailto:founder@example.com">founder@example.com</a>
-        </p>
+        <p>نحن نعمل على تحسين الموقع. شكرًا لتفهمكم.</p>
     </div>
+
+    <script>
+        // تحميل وتشغيل الأنميشن باستخدام Lottie
+        lottie.loadAnimation({
+            container: document.getElementById('lottie-animation'),
+            renderer: 'svg',
+            loop: true,
+            autoplay: true,
+            path: 'https://assets7.lottiefiles.com/packages/lf20_yr6zz3wv.json' // مسار ملف الأنميشن
+        });
+    </script>
 </body>
 </html>
