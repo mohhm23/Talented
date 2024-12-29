@@ -9,40 +9,48 @@
             margin: 0;
             font-family: 'Arial', sans-serif;
             color: #0ff;
-            background: #000 url('https://tse2.mm.bing.net/th?id=OIP.gatYIMeQoNKuIuSI6TGJFQHaJ4&pid=Api') no-repeat center center;
-            background-size: cover;
+            background: #000;
             overflow-x: hidden;
+            animation: backgroundGlow 10s infinite alternate;
         }
+
         header {
             background: rgba(0, 0, 0, 0.8);
             padding: 20px;
             text-align: center;
-            font-size: 2rem;
+            font-size: 2.5rem;
             text-transform: uppercase;
             border-bottom: 2px solid #0ff;
-            animation: glow 1.5s infinite alternate;
+            animation: textGlow 5s infinite alternate;
         }
+
         section {
             padding: 20px;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.9);
             margin: 20px auto;
             width: 90%;
             max-width: 1200px;
             border-radius: 10px;
             box-shadow: 0 0 20px #0ff;
-            animation: pulse 2s infinite alternate;
+            animation: boxPulse 8s infinite alternate;
         }
+
         h2 {
             color: #ff007f;
-            text-shadow: 0 0 10px #ff007f;
+            text-shadow: 0 0 15px #ff007f, 0 0 30px #0ff;
+            animation: textColorShift 5s infinite alternate;
         }
+
         p {
-            line-height: 1.6;
+            line-height: 1.8;
         }
-        a {
-            color: #0ff;
-            text-decoration: none;
+
+        ul li {
+            list-style: none;
+            padding: 5px 0;
+            animation: fadeIn 5s infinite alternate;
         }
+
         footer {
             text-align: center;
             padding: 10px;
@@ -50,23 +58,31 @@
             background: rgba(0, 0, 0, 0.8);
             border-top: 2px solid #0ff;
         }
-        @keyframes glow {
-            from {
-                text-shadow: 0 0 10px #0ff, 0 0 20px #0ff, 0 0 30px #ff007f;
-            }
-            to {
-                text-shadow: 0 0 20px #ff007f, 0 0 30px #0ff, 0 0 40px #ff007f;
-            }
+
+        /* Keyframes for animations */
+        @keyframes backgroundGlow {
+            0% { background-color: #000; }
+            100% { background-color: #111; }
         }
-        @keyframes pulse {
-            from {
-                transform: scale(1);
-                box-shadow: 0 0 20px #0ff;
-            }
-            to {
-                transform: scale(1.05);
-                box-shadow: 0 0 30px #ff007f;
-            }
+
+        @keyframes textGlow {
+            0% { text-shadow: 0 0 10px #0ff, 0 0 20px #0ff; }
+            100% { text-shadow: 0 0 20px #ff007f, 0 0 30px #0ff; }
+        }
+
+        @keyframes boxPulse {
+            0% { box-shadow: 0 0 10px #0ff; }
+            100% { box-shadow: 0 0 20px #ff007f; }
+        }
+
+        @keyframes textColorShift {
+            0% { color: #0ff; }
+            100% { color: #ff007f; }
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0.8; }
+            100% { opacity: 1; }
         }
     </style>
 </head>
@@ -93,25 +109,6 @@
         <p>V teams up with Jackie Welles to steal the Relic from Arasaka Corporation. Things go south, leading to Jackie’s death and V being forced to use the Relic to survive.</p>
         <h3>Johnny's Arrival</h3>
         <p>The implant introduces Johnny Silverhand’s consciousness, creating a tense relationship as they navigate a race against time to save V’s life.</p>
-    </section>
-    <section>
-        <h2>Key Characters</h2>
-        <ul>
-            <li><strong>Judy Alvarez:</strong> A skilled techie and ally.</li>
-            <li><strong>Panam Palmer:</strong> A nomad with a rebellious streak.</li>
-            <li><strong>Rogue Amendiares:</strong> A legendary mercenary from Johnny’s past.</li>
-            <li><strong>Goro Takemura:</strong> A former Arasaka bodyguard seeking redemption.</li>
-        </ul>
-    </section>
-    <section>
-        <h2>Endings</h2>
-        <p>The story offers multiple endings based on your choices:</p>
-        <ul>
-            <li><strong>Revenge:</strong> Team up with Johnny to destroy Arasaka.</li>
-            <li><strong>Corporate Alliance:</strong> Work with Arasaka to save your life.</li>
-            <li><strong>Freedom:</strong> Abandon everything and live on your terms.</li>
-            <li><strong>Tragic Sacrifice:</strong> Sacrifice yourself to save others.</li>
-        </ul>
     </section>
     <footer>
         Created with love for Cyberpunk 2077 fans
