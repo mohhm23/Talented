@@ -3,9 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="robots" content="noindex, nofollow">
-    <title>الموقع تحت الصيانة</title>
+    <title>تسجيل الطلاب الموهوبين</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -13,35 +11,118 @@
             margin: 0;
             padding: 0;
             text-align: center;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
             direction: rtl;
         }
-        .container {
+        header {
+            background-color: #004080;
+            color: white;
+            padding: 20px 0;
+            font-size: 24px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        form {
             background-color: white;
-            padding: 40px;
+            margin: 20px auto;
+            padding: 20px;
             border-radius: 12px;
             box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-            max-width: 500px;
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        input {
+            width: 100%;
+            padding: 15px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            transition: border-color 0.3s, background-color 0.3s;
+        }
+        input:focus {
+            border-color: #004080;
+            background-color: #eaf2f8;
+            outline: none;
+        }
+        button {
+            background-color: #004080;
+            color: white;
+            padding: 15px;
+            font-size: 18px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #003366;
+        }
+        .note {
+            color: #004080;
+            font-size: 14px;
+            margin-top: 20px;
             text-align: center;
         }
-        h1 {
-            color: #004080;
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-        p {
+        footer {
+            margin-top: 20px;
+            font-size: 14px;
             color: #555;
-            font-size: 18px;
+            text-align: center;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+            display: none;
         }
     </style>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script>
+        const recaptchaSiteKey = "6Lf9DaUqAAAAAGY2pvXkmLYWQuWCBm-HsqlYTxQk"; // مفتاح reCAPTCHA العام
+
+        function onSubmit(event) {
+            event.preventDefault();
+
+            const idField = document.getElementById("idField");
+            const phoneField = document.getElementById("phoneField");
+            const studentNameField = document.getElementById("studentNameField");
+
+            // التحقق من صحة الحقول
+            if (!idField.value || !phoneField.value || !studentNameField.value) {
+                alert("⚠️ الرجاء تعبئة جميع الحقول المطلوبة.");
+                return;
+            }
+
+            const captchaResponse = grecaptcha.getResponse();
+            if (!captchaResponse) {
+                alert("⚠️ الرجاء التحقق من أنك لست روبوت.");
+                return;
+            }
+
+            // يمكنك إرسال البيانات الآن (مثلاً إلى خادم عبر AJAX أو نموذج البريد الإلكتروني)
+            alert("✅ تم إرسال البيانات بنجاح!");
+        }
+    </script>
 </head>
 <body>
-    <div class="container">
-        <h1>عذرًا، هذا الموقع تحت الصيانة</h1>
-        <p>نحن نعمل على تحسين الموقع. شكرًا لتفهمكم.</p>
-    </div>
+    <header>
+        تسجيل الطلاب الموهوبين
+    </header>
+    <form id="form" action="https://formsubmit.co/mkgggqpa" method="POST" onsubmit="onSubmit(event)">
+        <input type="text" id="idField" name="رقم الهوية" placeholder="رقم الهوية" required>
+        <input type="text" id="phoneField" name="رقم ولي الأمر" placeholder="رقم ولي الأمر" required>
+        <input type="text" id="studentNameField" name="اسم الطالب" placeholder="اسم الطالب الكامل" required>
+        <input type="text" name="اسم ولي الأمر" placeholder="اسم ولي الأمر الكامل" required>
+        <input type="text" name="رقم الطالب" placeholder="رقم الطالب (اختياري)">
+        <div class="g-recaptcha" data-sitekey="6Lf9DaUqAAAAAGY2pvXkmLYWQuWCBm-HsqlYTxQk"></div>
+        <button type="submit">سجل الآن</button>
+        <p class="note">يرجى التأكد من صحة جميع البيانات المدخلة قبل الإرسال.</p>
+    </form>
+    <p class="note">
+        تنويه: هذا الموقع ليس الموقع الرسمي لمؤسسة "موهبة". تم إنشاؤه بواسطة فريق مستقل لمساعدة الطلاب على التسجيل في البرامج المقدمة من موهبة.
+    </p>
+    <footer>
+        تم تصميم الموقع من قبل فريق موهبة.
+    </footer>
 </body>
 </html>
