@@ -105,3 +105,167 @@
     </footer>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام إدارة الطلاب</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f8fa;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            direction: rtl;
+        }
+        header {
+            background-color: #004080;
+            color: white;
+            padding: 20px 0;
+            font-size: 24px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .container {
+            margin: 20px auto;
+            max-width: 600px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        input, button {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+        button {
+            background-color: #004080;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #003366;
+        }
+    </style>
+</head>
+<body>
+    <header>نظام إدارة الطلاب</header>
+    <div id="loginPage" class="container">
+        <h2>تسجيل الدخول</h2>
+        <form id="loginForm">
+            <input type="text" id="username" placeholder="اسم المستخدم" required>
+            <input type="password" id="password" placeholder="كلمة المرور" required>
+            <button type="submit">تسجيل الدخول</button>
+        </form>
+    </div>
+
+    <div id="dashboard" class="container" style="display: none;">
+        <h2>لوحة التحكم</h2>
+        <button onclick="addUser()">إضافة مستخدم</button>
+        <button onclick="addTask()">إضافة واجب</button>
+        <button onclick="viewTasks()">عرض الواجبات</button>
+        <button onclick="logout()">تسجيل الخروج</button>
+        <div id="output"></div>
+    </div>
+
+    <script>
+        // بيانات تسجيل الدخول (مشفرة)
+        const ADMIN_USERNAME = "admin";
+        const ADMIN_PASSWORD_HASH = "c5e478d59288c841aa530db6845c4c8d962893a001ce4e11a4963873aa98134a"; // كلمة مرور مشفرة: "SecureAdmin123!"
+
+        // بيانات الواجبات
+        const tasks = [];
+
+        // دالة تشفير SHA-256
+        async function hashPassword(password) {
+            const encoder = new TextEncoder();
+            const data = encoder.encode(password);
+            const hash = await crypto.subtle.digest('SHA-256', data);
+            return Array.from(new Uint8Array(hash)).map(byte => byte.toString(16).padStart(2, '0')).join('');
+        }
+
+        // تسجيل الدخول
+        document.getElementById("loginForm").addEventListener("submit", async (event) => {
+            event.preventDefault();
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            if (username !== ADMIN_USERNAME) {
+                alert("اسم المستخدم غير صحيح.");
+                return;
+            }
+
+            const passwordHash = await hashPassword(password);
+            if (passwordHash !== ADMIN_PASSWORD_HASH) {
+                alert("كلمة المرور غير صحيحة.");
+                return;
+            }
+
+            alert("تم تسجيل الدخول بنجاح!");
+            showDashboard();
+        });
+
+        // إظهار لوحة التحكم
+        function showDashboard() {
+            document.getElementById("loginPage").style.display = "none";
+            document.getElementById("dashboard").style.display = "block";
+        }
+
+        // تسجيل الخروج
+        function logout() {
+            document.getElementById("dashboard").style.display = "none";
+            document.getElementById("loginPage").style.display = "block";
+        }
+
+        // إضافة مستخدم
+        function addUser() {
+            const username = prompt("اسم المستخدم الجديد:");
+            const password = prompt("كلمة مرور المستخدم:");
+            if (username && password) {
+                alert("تم إضافة المستخدم بنجاح! (للاستخدام فقط في الجلسة الحالية)");
+            } else {
+                alert("يجب إدخال اسم مستخدم وكلمة مرور.");
+            }
+        }
+
+        // إضافة واجب
+        function addTask() {
+            const title = prompt("عنوان الواجب:");
+            const description = prompt("وصف الواجب:");
+            const points = prompt("النقاط:");
+            if (title && description && points) {
+                tasks.push({ title, description, points });
+                alert("تم إضافة الواجب بنجاح!");
+            } else {
+                alert("يجب إدخال جميع التفاصيل.");
+            }
+        }
+
+        // عرض الواجبات
+        function viewTasks() {
+            const output = document.getElementById("output");
+            output.innerHTML = "<h3>قائمة الواجبات</h3>";
+            if (tasks.length === 0) {
+                output.innerHTML += "<p>لا توجد واجبات مضافة حتى الآن.</p>";
+            } else {
+                tasks.forEach((task, index) => {
+                    output.innerHTML += `
+                        <div>
+                            <strong>${index + 1}. ${task.title}</strong><br>
+                            ${task.description}<br>
+                            نقاط: ${task.points}<br><hr>
+                        </div>`;
+                });
+            }
+        }
+    </script>
+</body>
+</html>
