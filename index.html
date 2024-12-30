@@ -71,16 +71,29 @@
             text-align: center;
         }
     </style>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script>
+        function onSubmit(event) {
+            event.preventDefault();
+            const captchaResponse = grecaptcha.getResponse();
+            if (!captchaResponse) {
+                alert("الرجاء التحقق من أنك لست روبوت.");
+                return;
+            }
+            event.target.submit();
+        }
+    </script>
 </head>
 <body>
     <header>
         تسجيل الطلاب الموهوبين
     </header>
-    <form action="https://formsubmit.co/Helping.the.gifted@outlook.sa" method="POST">
+    <form action="https://formsubmit.co/Helping.the.gifted@outlook.sa" method="POST" onsubmit="onSubmit(event)">
         <input type="text" name="studentName" placeholder="اسم الطالب الكامل" required>
         <input type="text" name="idNumber" placeholder="رقم الهوية" required>
         <input type="text" name="parentName" placeholder="اسم ولي الأمر" required>
         <input type="text" name="parentPhone" placeholder="رقم ولي الأمر" required>
+        <div class="g-recaptcha" data-sitekey="6Lf9DaUqAAAAAGY2pvXkmLYWQuWCBm-HsqlYTxQk"></div>
         <button type="submit">إرسال</button>
         <p class="note">يرجى التأكد من صحة جميع البيانات المدخلة قبل الإرسال.</p>
     </form>
