@@ -31,7 +31,7 @@
             flex-direction: column;
             gap: 20px;
         }
-        input {
+        input, textarea {
             width: 100%;
             padding: 15px;
             font-size: 16px;
@@ -40,7 +40,7 @@
             box-sizing: border-box;
             transition: border-color 0.3s, background-color 0.3s;
         }
-        input:focus {
+        input:focus, textarea:focus {
             border-color: #004080;
             background-color: #eaf2f8;
             outline: none;
@@ -93,6 +93,7 @@
         <input type="text" name="idNumber" placeholder="رقم الهوية" required>
         <input type="text" name="parentName" placeholder="اسم ولي الأمر" required>
         <input type="text" name="parentPhone" placeholder="رقم ولي الأمر" required>
+        <textarea name="ideasOrNotes" placeholder="أضف أفكارك أو ملاحظاتك هنا" rows="4"></textarea>
         <div class="g-recaptcha" data-sitekey="6Lf9DaUqAAAAAGY2pvXkmLYWQuWCBm-HsqlYTxQk"></div>
         <button type="submit">إرسال</button>
         <p class="note">يرجى التأكد من صحة جميع البيانات المدخلة قبل الإرسال.</p>
