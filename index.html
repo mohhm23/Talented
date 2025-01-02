@@ -3,106 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تسجيل الطلاب الموهوبين</title>
+    <title>سلامولي</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f5f8fa;
             margin: 0;
             padding: 0;
-            text-align: center;
-            direction: rtl;
-        }
-        header {
-            background-color: #004080;
-            color: white;
-            padding: 20px 0;
-            font-size: 24px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-        form {
-            background-color: white;
-            margin: 20px auto;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-            max-width: 400px;
             display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-        input, textarea {
-            width: 100%;
-            padding: 15px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            box-sizing: border-box;
-            transition: border-color 0.3s, background-color 0.3s;
-        }
-        input:focus, textarea:focus {
-            border-color: #004080;
-            background-color: #eaf2f8;
-            outline: none;
-        }
-        button {
-            background-color: #004080;
-            color: white;
-            padding: 15px;
-            font-size: 18px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        button:hover {
-            background-color: #003366;
-        }
-        .note {
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
             color: #004080;
-            font-size: 14px;
-            margin-top: 20px;
             text-align: center;
-        }
-        footer {
-            margin-top: 20px;
-            font-size: 14px;
-            color: #555;
-            text-align: center;
+            font-size: 24px;
         }
     </style>
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-    <script>
-        function onSubmit(event) {
-            event.preventDefault();
-            const captchaResponse = grecaptcha.getResponse();
-            if (!captchaResponse) {
-                alert("الرجاء التحقق من أنك لست روبوت.");
-                return;
-            }
-            event.target.submit();
-        }
-    </script>
 </head>
 <body>
-    <header>
-        تسجيل الطلاب الموهوبين
-    </header>
-    <form action="https://formsubmit.co/Helping.the.gifted@outlook.sa" method="POST" onsubmit="onSubmit(event)">
-        <input type="text" name="studentName" placeholder="اسم الطالب الكامل" required>
-        <input type="text" name="idNumber" placeholder="رقم الهوية" required>
-        <input type="text" name="parentName" placeholder="اسم ولي الأمر" required>
-        <input type="text" name="parentPhone" placeholder="رقم ولي الأمر" required>
-        <textarea name="ideasOrNotes" placeholder="أضف أفكارك أو ملاحظاتك هنا" rows="4"></textarea>
-        <div class="g-recaptcha" data-sitekey="6Lf9DaUqAAAAAGY2pvXkmLYWQuWCBm-HsqlYTxQk"></div>
-        <button type="submit">إرسال</button>
-        <p class="note">يرجى التأكد من صحة جميع البيانات المدخلة قبل الإرسال.</p>
-    </form>
-    <p class="note">
-        تنويه: هذا الموقع ليس الموقع الرسمي لمؤسسة "موهبة". تم إنشاؤه بواسطة فريق مستقل لمساعدة الطلاب على التسجيل في البرامج المقدمة من موهبة.
-    </p>
-    <footer>
-        تم تصميم الموقع من قبل فريق موهبة.
-    </footer>
+    <p>سلامولي</p>
 </body>
 </html>
